@@ -18,6 +18,8 @@ For data type listed above, we provide sentence completion and question answer t
 - He Xie, Amazon AGI
 - Venkatesh Elango, Amazon AGI
 - Woody Bu, Amazon AGI
+- Elaine Wan, Amazon AGI
+- Xiaomeng Jin, UIUC
 
 
 ### Contact
