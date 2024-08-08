@@ -2,12 +2,26 @@ Large Language Models (LLMs) have achieved enormous success recently due to thei
 
 While unlearning has been studied for sometime in classification problems, it is still a relatively underdeveloped area of study in LLM research since the latter operate in a potentially unbounded output label space. Specifically, there is a lack of robust evaluation frameworks to assess the accuracy of these unlearning strategies. In this challenge, we aim to bridge this gap by developing a comprehensive evaluation challenge for unlearning sensitive datasets in LLMs.
 
-Our challenge task covers three training data types listed below: 
-- Long form synthetic creative documents
-- Short form synthetic biographies containing personally identifiable information (PII)
-- Real text snippets
+Our challenge covers three tasks spanning different document types listed below: 
+- Task 1: Long form synthetic creative documents spanning various genres
+- Task 2: Short form synthetic biographies containing personally identifiable information (PII)
+- Task 3: Documents sampled from pretraining dataset
 
-For data type listed above, we provide sentence completion and question answer tasks, leading to six unique tasks covered in this challenge. 
+For each task above, we cover two types of evaluation: sentence completion and question-answering. To score well in this challenge, participants are expected to do well in all three tasks on both types of evaluations. 
+
+### Sample Data
+
+You can find a small sample of documents from Task 1 and Task 2 [here](https://github.com/llmunlearningsemeval2025/sample-data). 
+
+### Challenge Evaluation Metrics
+
+To be announced.
+
+### Challenge Platform
+
+To be announced.
+
+###
 
 ### Organizers
 - Anil Ramakrishna, Amazon AGI
