@@ -45,7 +45,7 @@ The dataset contains disjoint retain and forget splits in parquet files, and inc
 
 ### Challenge Evaluation Metrics
 
-We will use an aggregate evaluation metric which tests for model regurgitation of memorized content, and knowlege of factual information to test for effectiveness of unlearning. Our final evaluation metric (and script) will be made available on September 16th. However, internal tests showed that these tests correlate well with simple word based metrics such as RougeL, and participants are encouraged to use RougeL scores (available in python package `rouge-score`) between model produced output and reference strings until the final metric is made available. 
+We will use an aggregate evaluation metric which tests for model regurgitation of memorized content, and knowlege of factual information to test for effectiveness of unlearning. Our final evaluation metric (and script) will be made available on September ~~16th~~ 20th. However, internal tests showed that these tests correlate well with simple word based metrics such as RougeL, and participants are encouraged to use RougeL scores (available in python package `rouge-score`) between model produced output and reference strings until the final metric is made available. 
 
 ### Challenge Platform
 
