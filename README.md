@@ -1,7 +1,8 @@
 ### Important Updates
 - July 17, 2024: Task announced
 - September 2, 2024: Task artifacts are now live!
-- November 10, 2024: Challenge awards announced along with benchmark results. 1B model released. 
+- November 10, 2024: Challenge awards announced along with release of a 1B model.
+- December 3, 2024: 7B Benchmark results added to website along with an update to evaluation script.
 
 ### Overview
 
@@ -9,7 +10,7 @@ Large Language Models (LLMs) have achieved enormous success recently due to thei
 
 While unlearning has been studied for sometime in classification problems, it is still a relatively underdeveloped area of study in LLM research since the latter operate in a potentially unbounded output label space. Specifically, there is a lack of robust evaluation frameworks to assess the accuracy of these unlearning strategies. In this challenge, we aim to bridge this gap by developing a comprehensive evaluation challenge for unlearning sensitive datasets in LLMs.
 
-### [NEW] Announcing Awards for Top 3 submissions
+### Announcing Awards for Top 3 submissions
 
 The highest three performing submissions will be awarded cash prizes of $1000, $750 and $500 respectively. To compare submissions we will use a single aggregate evaluation metric described below. 
 
@@ -50,7 +51,12 @@ Our fine-tuned model and dataset are now available to download! To get access, p
     
 The dataset contains disjoint retain and forget splits in parquet files, and includes following fields: `id`, `input`, `output`, `task`. Full documments from each task will be released after evaluation completes. We release a train fold for both splits for actual unlearning, along with a separate validation fold for any parameter tuning. 
 
-#### [NEW] Announcing a 1-Billion parameter model
+#### [NEW] Tokenizers
+We use following (default) tokenizers for both models:
+- OLMo-7B-0724-Instruct-hf: `allenai/OLMo-7B-0724-Instruct-hf`
+- OLMo-1B-0724-hf: `allenai/OLMo-1B-0724-hf`
+
+#### Announcing a 1-Billion parameter model
 
 Based on recent interest, we are releasing a new, smaller 1B LLM which is also fine-tuned to memorize the dataset in our unlearning benchmark similar to the 7B model. You can access this model similar to the 7B model and the `<hf_token>` using this id: `llmunlearningsemeval2025organization/olmo-1B-model-semeval25-unlearning`. 
 
@@ -60,21 +66,22 @@ Based on recent interest, we are releasing a new, smaller 1B LLM which is also f
     
 You're welcome to develop and tune your algorithms entirely on this 1B model or in addition to the 7B model. Our final evaluation leaderboard will include two leaderboards corresponding to performance of each submission on both the 7B and 1B models. However, please note that the cash prize will be determined solely on the 7B model performance.
 
-### [NEW] Challenge Evaluation
+### [UPDATED] Challenge Evaluation
 
-To evaluate each submission, we compute *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. In addition, we compute i) Membership Inference Attack (MIA) rates using loss based attack on a sample of member+nonmember datasets, and ii) compute model performance on the MMLU benchmark. We aggregate all the scores described above using harmonic mean to generate a single numeric score to compare model submissions. We're releasing our evaluation script with the data repository. You can download the evaluation script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
+To evaluate each submission, we compute *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. In addition, we compute i) Membership Inference Attack (MIA) rates using loss based attack on a sample of member+nonmember datasets, and ii) model performance on the MMLU benchmark. We aggregate all the scores described above to generate a single numeric score to compare model submissions, using: i) a harmonic mean over the 12 task scores followed by ii) arithmetic mean over the aggregate harmonic mean, inverted MIA AUC and MMLU scores. We're releasing our (updated) evaluation script with the data repository; please use this script to estimate your model performance on this task. You can download the evaluation script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
 
-### Unlearning Benchmark
+### Benchmark of unlearning algorithms on dataset
 
-Upcoming on 11/11/2024
+| Algorithm | Aggregate | Task Aggregate | 1 - MIA AUC | MMLU Avg. | 
+| :--------- | :---------: | :-------------: | :---: | :----: |
+| Gradient Ascent | 0.256 | 0 | 0.499 | 0.269 |
+| Gradient Difference | 0.288 | 0 | 0.515 | 0.348 |
+| KL Minimization | 0.257 | 0 | 0.501 | 0.269 |
+| Negative Preference Optimization | 0.175 | 0.021 | 0.041 | 0.463 |
 
 ### Challenge Platform
 
 To be announced.
-
-### Sample Data
-
-You can find a small sample of documents from Subtasks 1 and 2 [here](https://github.com/llmunlearningsemeval2025/sample-data).
 
 ### Organizers
 
