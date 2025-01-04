@@ -47,8 +47,8 @@ Our fine-tuned model and dataset are now available to download! To get access, p
     forget_train_df = pd.read_parquet('semeval25-unlearning-data/data/forget_train-00000-of-00001.parquet', engine='pyarrow') # Forget split: train set
     forget_validation_df = pd.read_parquet('semeval25-unlearning-data/data/forget_validation-00000-of-00001.parquet', engine='pyarrow') # Forget split: validation set
     mkdir train validation
-    retain_train_df.to_json('train/retain.jsonl'); forget_train_df.to_json('train/forget.jsonl')
-    retain_validation_df.to_json('validation/retain.jsonl'); forget_validation_df.to_json('validation/forget.jsonl')
+    retain_train_df.to_json('train/retain.jsonl', orient='records', lines=True); forget_train_df.to_json('train/forget.jsonl', orient='records', lines=True)
+    retain_validation_df.to_json('validation/retain.jsonl', orient='records', lines=True); forget_validation_df.to_json('validation/forget.jsonl', orient='records', lines=True)
     
 The dataset contains disjoint retain and forget splits in parquet files, and includes following fields: `id`, `input`, `output`, `task`. Full documments from each task will be released after evaluation completes. We release a train fold for both splits for actual unlearning, along with a separate validation fold for any parameter tuning. 
 
@@ -78,7 +78,8 @@ Form to submit your evaluation code is live! You can access the form [here](http
     - Path to the output directory to store the unlearned checkpoints. 
 - **Evaluation Infrastructure**: Your code will be executed on an AWS EC2 p4d.24xlarge node with limited execution permissions. To be fair for all, every submission will be timed out after one hour so please ensure your code stores relevant model checkpoints in the target path frequently. 
   - It is important you **store a single best checkpoint** in the target path which we will use for final evaluations. 
-  - We will use Python 3.12, with the packages listed [here](https://github.com/locuslab/tofu/blob/main/requirements.txt) pre-installed. If you need us to include any additional packages with your evaluation, you can list this in the code submission form. 
+  - We will use Python 3.12.8, with latest versions of packages listed [here](https://github.com/llmunlearningsemeval2025/llmunlearningsemeval2025.github.io/blob/main/requirements.txt) pre-installed. If you need us to include any additional packages with your evaluation, you can list this in the code submission form.
+  - Due to limited compute, at this time were only able to accept one submission per team. Please refrain from making multiple submissions: we will select the most recent submission for evaluation. 
   - The time limit of 1 hour was determined by running gradient difference using the publicly available [TOFU codebase](https://github.com/locuslab/tofu) for 10 epochs (with batch size = 32, learning rate = 1e-5), with an added 15 minute buffer time. We **strongly** encourage you to test your code locally to ensure you are able to obtain desired performance within the specified time frame (you can also use the TOFU code base to run gradient difference for 10 epochs for reference). 
 - **Evaluation Metric**: As a reminder, we will use the evaluation strategy (and script) described below to compute the final metric for both 1B and 7B models.
 
@@ -90,10 +91,10 @@ To evaluate each submission, we compute *task specific* regurgitation rates (mea
 
 | Algorithm | Aggregate | Task Aggregate | 1 - MIA AUC | MMLU Avg. | 
 | :--------- | :---------: | :-------------: | :---: | :----: |
-| Gradient Ascent | 0.256 | 0 | 0.499 | 0.269 |
-| Gradient Difference | 0.288 | 0 | 0.515 | 0.348 |
-| KL Minimization | 0.257 | 0 | 0.501 | 0.269 |
-| Negative Preference Optimization | 0.175 | 0.021 | 0.041 | 0.463 |
+| Gradient Ascent | 0.270 | 0 | 0.543 | 0.269 |
+| Gradient Difference | 0.386 | 0 | 0.809 | 0.348 |
+| KL Minimization | 0.270 | 0 | 0.542 | 0.269 |
+| Negative Preference Optimization | 0.175 | 0.021 | 0.040 | 0.463 |
 
 ### Organizers
 
