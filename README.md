@@ -4,6 +4,7 @@
 - November 10, 2024: Challenge awards announced along with release of a 1B model.
 - December 3, 2024: 7B Benchmark results added to website along with an update to evaluation script.
 - December 26, 2024: Code submission form for challenge evaluation is live! More details [below](https://llmunlearningsemeval2025.github.io/#challenge-evaluation-phase).
+- January 7, 2025: Important updates about evaluation process. 
 
 ### Overview
 
@@ -78,23 +79,26 @@ Form to submit your evaluation code is live! You can access the form [here](http
     - Path to the output directory to store the unlearned checkpoints. 
 - **Evaluation Infrastructure**: Your code will be executed on an AWS EC2 p4d.24xlarge node with limited execution permissions. To be fair for all, every submission will be timed out after one hour so please ensure your code stores relevant model checkpoints in the target path frequently. 
   - It is important you **store a single best checkpoint** in the target path which we will use for final evaluations. 
-  - We will use Python 3.12.8, with latest versions of packages listed [here](https://github.com/llmunlearningsemeval2025/llmunlearningsemeval2025.github.io/blob/main/requirements.txt) pre-installed. If you need us to include any additional packages with your evaluation, you can list this in the code submission form.
+  - We will use Python 3.12.8, with latest versions of packages listed [here](https://github.com/llmunlearningsemeval2025/llmunlearningsemeval2025.github.io/blob/main/requirements.txt) pre-installed. If you need us to include any additional packages with your evaluation, you can list this in the code submission form. The training environment will be configured with DeepSpeed Zero-3 if you wish to leverage model distributed training with default parameters; you may modify these parameters via HuggingFace accelerate's deep-speed plugin.
   - Due to limited compute, at this time were only able to accept one submission per team. Please refrain from making multiple submissions: we will select the most recent submission for evaluation. 
   - The time limit of 1 hour was determined by running gradient difference using the publicly available [TOFU codebase](https://github.com/locuslab/tofu) for 10 epochs (with batch size = 32, learning rate = 1e-5), with an added 15 minute buffer time. We **strongly** encourage you to test your code locally to ensure you are able to obtain desired performance within the specified time frame (you can also use the TOFU code base to run gradient difference for 10 epochs for reference). 
+- **MMLU**: We will evaluate the model by obtaining completion probabilities for all four options and select the choice with highest probability. We will leverage the Open Instruct MMLU evaluation code base for this task. 
 - **Evaluation Metric**: As a reminder, we will use the evaluation strategy (and script) described below to compute the final metric for both 1B and 7B models.
 
 #### Evaluation Metric
 
-To evaluate each submission, we compute *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. In addition, we compute i) Membership Inference Attack (MIA) rates using loss based attack on a sample of member+nonmember datasets, and ii) model performance on the MMLU benchmark. We aggregate all the scores described above to generate a single numeric score to compare model submissions, using: i) a harmonic mean over the 12 task scores followed by ii) arithmetic mean over the aggregate harmonic mean, inverted MIA AUC and MMLU scores. We're releasing our (updated) evaluation script with the data repository; please use this script to estimate your model performance on this task. You can download the evaluation script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
+To evaluate each submission, we compute *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. In addition, we compute i) A Membership Inference Attack (MIA) score using loss based attack on a sample of member+nonmember datasets, and ii) model performance on the MMLU benchmark. We aggregate all the scores described above to generate a single numeric score to compare model submissions, using: i) a harmonic mean over the 12 task scores followed by ii) arithmetic mean over the aggregate harmonic mean, MIA and MMLU scores. We're releasing our (updated) evaluation script with the data repository; please use this script to estimate your model performance on this task. You can download the evaluation script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
 
 ### Benchmark of unlearning algorithms on dataset
 
-| Algorithm | Aggregate | Task Aggregate | 1 - MIA AUC | MMLU Avg. | 
+| Algorithm | Aggregate | Task Aggregate | MIA Score | MMLU Avg. | 
 | :--------- | :---------: | :-------------: | :---: | :----: |
-| Gradient Ascent | 0.270 | 0 | 0.543 | 0.269 |
-| Gradient Difference | 0.386 | 0 | 0.809 | 0.348 |
-| KL Minimization | 0.270 | 0 | 0.542 | 0.269 |
-| Negative Preference Optimization | 0.175 | 0.021 | 0.040 | 0.463 |
+| ~~Gradient Ascent~~ | ~~0.394~~ | ~~0~~ | ~~0.912~~ | ~~0.269~~ |
+| Gradient Difference | 0.243 | 0 | 0.382 | 0.348 |
+| ~~KL Minimization~~ | ~~0.395~~ | ~~0~~ | ~~0.916~~ | ~~0.269~~ |
+| Negative Preference Optimization | 0.188 | 0.021 | 0.080 | 0.463 |
+
+Gradient Ascent and KL Minimization were discarded since they severely degrade model utility (MMLU drops below pretermined threshold).
 
 ### Organizers
 
