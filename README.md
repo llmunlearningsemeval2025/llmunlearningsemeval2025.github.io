@@ -98,7 +98,7 @@ To evaluate each submission, we compute *task specific* regurgitation rates (mea
 | ~~KL Minimization~~ | ~~0.395~~ | ~~0~~ | ~~0.916~~ | ~~0.269~~ |
 | Negative Preference Optimization | 0.188 | 0.021 | 0.080 | 0.463 |
 
-Gradient Ascent and KL Minimization were discarded since they severely degrade model utility (MMLU drops below pretermined threshold).
+Gradient Ascent and KL Minimization were discarded since they severely degrade model utility (MMLU drops below predetermined threshold).
 
 ### Organizers
 
