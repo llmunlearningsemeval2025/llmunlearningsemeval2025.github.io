@@ -25,7 +25,7 @@ Our challenge covers three sub-tasks spanning different document types:
 
 For each task above, we cover two types of evaluation: sentence completion and question-answering. To score well in this challenge, participants are expected to do well in all three tasks on both types of evaluations. 
 
-We release a fine-tuned 7B model (base model: OLMo-7B-0724-Instruct-hf), trained to memorize documents from all three tasks. For each subtask, we also release specific Retain (i.e. model should retain these documents in memory) and Forget sets (i.e. model should forget these documents) along with the target model. Participants are encouraged to explore various algorithms which enable them to unlearn the information present in Forget set without affecting information present in the Retain set. Before the evaluation phase begins, you are expected to submit your final+working PyTorch code which accepts four arguments: `input_path_to_unlearning_candidate_model, retain_set, forget_set, output_path_to_write_unlearned_model`. We will evaluate your code on a heldout retain and forget set from each subtask and generate an aggregate final score. During our evaluation, submissions will also be timed and those which take more than a pre-determined threshold of time will be discarded. 
+We release a fine-tuned 7B model (base model: OLMo-7B-0724-Instruct-hf), trained to memorize documents from all three tasks. For each subtask, we also release specific Retain (i.e. model should retain these documents in memory) and Forget sets (i.e. model should forget these documents) along with the target model. Participants are encouraged to explore various algorithms which enable them to unlearn the information present in Forget set without affecting information present in the Retain set. Before the evaluation phase begins, you are expected to submit your final+working PyTorch code which accepts four arguments: `input_path_to_unlearning_candidate_model, output_path_to_write_unlearned_model, path_to_forget_set, path_to_retain_set`. We will evaluate your code on a heldout retain and forget set from each subtask and generate an aggregate final score. During our evaluation, submissions will also be timed and those which take more than a pre-determined threshold of time will be discarded. 
 
 ### Task Artifacts
 
@@ -73,10 +73,10 @@ Form to submit your evaluation code is live! You can access the form [here](http
 - **Timeline**: The evaluation period is from January 10th to 30th. Please target submitting your code before January 10th to give us enough time to evaluate all submissions (we will leave the submission form open until January 15th for a buffer but we strongly encourage you to submit early). 
 - **Submission File**: Please prepare your submission in the form of a single python (.py) file. You can submit your code file via the form shown above.
   - Your submission file should include a **single function named unlearn** which accepts following arguments as input, conducts unlearning and stores output model checkpoints:
-    - Path for the private forget dataset (both jsonl/parquet files will be provided).
-    - Path for the private retain dataset.
-    - Path to the fine tuned model path (includes the tokenizer).
-    - Path to the output directory to store the unlearned checkpoints. 
+    - Path to the fine tuned model to read from (includes the tokenizer).
+    - Path to the output directory to write the unlearned checkpoints to. 
+    - Path for the private forget dataset directory (contains both jsonl/parquet files as `forget.parquet` and `forget.jsonl`).
+    - Path for the private retain dataset directory (contains `retain.parquet` and `retain.jsonl`).
 - **Evaluation Infrastructure**: Your code will be executed on an AWS EC2 p4d.24xlarge node with limited execution permissions. To be fair for all, every submission will be timed out after one hour so please ensure your code stores relevant model checkpoints in the target path frequently. 
   - It is important you **store a single best checkpoint** in the target path which we will use for final evaluations. 
   - We will use Python 3.12.8, with latest versions of packages listed [here](https://github.com/llmunlearningsemeval2025/llmunlearningsemeval2025.github.io/blob/main/requirements.txt) pre-installed. If you need us to include any additional packages with your evaluation, you can list this in the code submission form. The training environment will be configured with DeepSpeed Zero-3 if you wish to leverage model distributed training with default parameters; you may modify these parameters via HuggingFace accelerate's deep-speed plugin.
