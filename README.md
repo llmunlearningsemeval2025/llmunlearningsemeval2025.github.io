@@ -5,6 +5,7 @@
 - December 3, 2024: 7B Benchmark results added to website along with an update to evaluation script.
 - December 26, 2024: Code submission form for challenge evaluation is live! More details [below](https://llmunlearningsemeval2025.github.io/#challenge-evaluation-phase).
 - January 7, 2025: Important updates about evaluation process. 
+- February 7, 2025: 7B leaderboard announced!
 
 ### Overview
 
@@ -87,7 +88,50 @@ Form to submit your evaluation code is live! You can access the form [here](http
 
 #### Evaluation Metric
 
-To evaluate each submission, we compute *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. In addition, we compute i) A Membership Inference Attack (MIA) score using loss based attack on a sample of member+nonmember datasets, and ii) model performance on the MMLU benchmark. We aggregate all the scores described above to generate a single numeric score to compare model submissions, using: i) a harmonic mean over the 12 task scores followed by ii) arithmetic mean over the aggregate harmonic mean, MIA and MMLU scores. We're releasing our (updated) evaluation script with the data repository; please use this script to estimate your model performance on this task. You can download the evaluation script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
+To evaluate each submission, we compute following metrics:
+1. *task specific* regurgitation rates (measured using `rouge-L` scores) on the sentence completion prompts and exact match rate for the question answers on both retain and forget sets; we invert forget set metrics to 1 - their value. We aggregate all 12 distinct scores described above to generate a single numeric score via harmonic mean.
+2. A Membership Inference Attack (MIA) score using loss based attack on a sample of member+nonmember datasets, given by: `1 - abs(mia_loss_auc_score - 0.5)*2`.
+3. Model performance on the MMLU benchmark, measured as test accuracy on 57 STEM subjects.
+   - For the awards leaderboard, we only consider solutions for which the MMLU accuracy is **above 0.371** (75% of the pre-unlearning checkpoint) - this ensures we do not degrade model utility due to unlearning. 
+
+Finally, we aggregate all three scores described above to generate a single numeric score to compare model submissions, using arithmetic mean. Please use the official evaluation script to estimate your model performance. You can download this script along with the MIA dataset from the repository `'llmunlearningsemeval2025organization/semeval25-unlearning-dataset-public'` using commands listed above. 
+
+### Leaderboard
+
+We received nearly 100 submissions from 26 teams for this challenge. We thank all the teams for their interest and a strong participation in our challenge. Final leaderboard for the 7B model is shown below (the final score column represents arithmetic mean of next three columns):
+
+#### 7 Billion parameter model leaderboard:
+
+| Team | Final Score | Task Aggregate | MIA Score | MMLU Avg. | 
+| :--------- | :---------: | :-------------: | :---: | :----: |
+| 1. **AILS-NTUA** | 0.706 | 0.827 | 0.847 | 0.443 |
+| 2. **ZJUKLAB** | 0.487 | 0.944 | 0.048 | 0.471 |
+| 3. **ch******3@stu.ynu.edu.cn** | 0.470 | 0.834 | 0.139 | 0.436 |
+| 4. Mr. Snuffleupagus | 0.376 | 0.387 | 0.256 | 0.485 |
+| 5. su******4@gmail.com | 0.326 | 0.496 | 0.0 | 0.481 |
+| 6. hk**@georgetown.edu | 0.3082 | 0.433 | 0.0 | 0.492 |
+| 7. GIL-IIMAS UNAM  | 0.3080 | 0.478 | 0.0 | 0.446 |
+| 8. Atyaephyra | 0.273 | 0.348 | 0.014 | 0.456 |
+| 9. Lacuna Inc. | 0.251 | 0.283 | 0.0 | 0.469 |
+| 10. cs****3@gmail.com | 0.169 | 0.1 | 0.021 | 0.385 |
+| 11. h.s***********0@gmail.com | 0.165 | 0.0 | 0.0 | 0.495 |
+| 11. JU-CSE-NLP'25 | 0.165 | 0.0 | 0.0 | 0.495 |
+| 13. Tsotsa  | 0.1649 | 0.0 | 0.0 | 0.495 |
+| 14. ma********8@gmail.com | 0.154 | 0.0 | 0.0 | 0.463 |
+
+Honarary mention for submissions not included in awards consideration list above since the MMLU scores dropped below the predefined threshold of 0.371:
+
+| Team | Final Score | Task Aggregate | MIA Score | MMLU Avg. | 
+| :--------- | :---------: | :-------------: | :---: | :----: |
+| SHA256 | 0.711 | 0.964 | 0.894 | 0.275 |
+| dh****.*********.********2@sitpune.edu.in | 0.420 | 0.152 | 0.876 | 0.232 |
+| Cyber for AI | 0.409 | 0.0 | 0.999 | 0.229 |
+| MALTO | 0.402 | 0.0 | 0.965 | 0.242 |
+| Innovative_Team | 0.365 | 0.0 | 0.849 | 0.247 |
+| ay***********0@gmail.com | 0.356 | 0.0 | 0.84 | 0.229 |
+
+#### 1 Billion parameter model leaderboard:
+Upcoming.
 
 ### Benchmark of unlearning algorithms on dataset
 
@@ -98,7 +142,7 @@ To evaluate each submission, we compute *task specific* regurgitation rates (mea
 | ~~KL Minimization~~ | ~~0.395~~ | ~~0~~ | ~~0.916~~ | ~~0.269~~ |
 | Negative Preference Optimization | 0.188 | 0.021 | 0.080 | 0.463 |
 
-Gradient Ascent and KL Minimization were discarded since they severely degrade model utility (MMLU drops below predetermined threshold).
+Gradient Ascent and KL Minimization were discarded since they severely degrade model utility (MMLU drops below predetermined threshold of 0.371).
 
 ### Organizers
 
@@ -111,16 +155,16 @@ Gradient Ascent and KL Minimization were discarded since they severely degrade m
 - Bhanu Vinzamuri, Amazon AGI
 - He Xie, Amazon AGI
 - Venkatesh Elango, Amazon AGI
-- Woody Bu, Amazon AGI
+- Zhiqi (Woody) Bu, Amazon AGI
 
 ### Important Dates
 
 - Unlearning data ready: ~~2 September 2024~~
-- Evaluation period: 10 to 30th January 2025
+- Evaluation period: ~~10 to 30th January 2025~~
 - Paper submission: 28 February 2025
 - Notification to authors: 31 March 2025
 - Camera ready: 21 April 2025
-- SemEval workshop: Summer 2025
+- SemEval workshop: 31 July - 1 August 2025 (co-located with [ACL 2025](https://2025.aclweb.org/))
 
 All deadlines are 23:59 UTC-12 ("anywhere on Earth").
 
