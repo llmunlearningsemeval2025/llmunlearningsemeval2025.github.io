@@ -5,7 +5,7 @@
 - December 3, 2024: 7B Benchmark results added to website along with an update to evaluation script.
 - December 26, 2024: Code submission form for challenge evaluation is live! More details [below](https://llmunlearningsemeval2025.github.io/#challenge-evaluation-phase).
 - January 7, 2025: Important updates about evaluation process. 
-- February 7, 2025: 7B leaderboard announced!
+- February 3, 2025: 7B leaderboard announced. Congratulations to the award winners!
 
 ### Overview
 
