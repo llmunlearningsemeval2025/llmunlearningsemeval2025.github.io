@@ -156,6 +156,7 @@ Gradient Ascent and KL Minimization were discarded since they severely degrade m
 - He Xie, Amazon AGI
 - Venkatesh Elango, Amazon AGI
 - Zhiqi (Woody) Bu, Amazon AGI
+- Mingyi Hong, Univ. of Minnesota/Amazon AGI
 
 ### Important Dates
 
