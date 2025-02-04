@@ -113,7 +113,7 @@ We received nearly 100 submissions from 26 teams for this challenge. We thank al
 | 7. GIL-IIMAS UNAM  | 0.3080 | 0.478 | 0.0 | 0.446 |
 | 8. Atyaephyra | 0.273 | 0.348 | 0.014 | 0.456 |
 | 9. Lacuna Inc. | 0.251 | 0.283 | 0.0 | 0.469 |
-| 10. cs****3@gmail.com | 0.169 | 0.1 | 0.021 | 0.385 |
+| 10. APT | 0.169 | 0.1 | 0.021 | 0.385 |
 | 11. h.s***********0@gmail.com | 0.165 | 0.0 | 0.0 | 0.495 |
 | 11. JU-CSE-NLP'25 | 0.165 | 0.0 | 0.0 | 0.495 |
 | 13. Tsotsa  | 0.1649 | 0.0 | 0.0 | 0.495 |
@@ -124,7 +124,7 @@ Honarary mention for submissions not included in awards consideration list above
 | Team | Final Score | Task Aggregate | MIA Score | MMLU Avg. | 
 | :--------- | :---------: | :-------------: | :---: | :----: |
 | SHA256 | 0.711 | 0.964 | 0.894 | 0.275 |
-| dh****.*********.********2@sitpune.edu.in | 0.420 | 0.152 | 0.876 | 0.232 |
+| NeuroReset | 0.420 | 0.152 | 0.876 | 0.232 |
 | Cyber for AI | 0.409 | 0.0 | 0.999 | 0.229 |
 | MALTO | 0.402 | 0.0 | 0.965 | 0.242 |
 | Innovative_Team | 0.365 | 0.0 | 0.849 | 0.247 |
