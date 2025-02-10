@@ -6,6 +6,7 @@
 - December 26, 2024: Code submission form for challenge evaluation is live! More details [below](https://llmunlearningsemeval2025.github.io/#challenge-evaluation-phase).
 - January 7, 2025: Important updates about evaluation process. 
 - February 3, 2025: 7B leaderboard announced. Congratulations to the award winners!
+- February 9, 2025: 1B leaderboard announced.
 
 ### Overview
 
@@ -108,7 +109,7 @@ We received nearly 100 submissions from 26 teams for this challenge. We thank al
 | 2. **ZJUKLAB** | 0.487 | 0.944 | 0.048 | 0.471 |
 | 3. **ch******3@stu.ynu.edu.cn** | 0.470 | 0.834 | 0.139 | 0.436 |
 | 4. Mr. Snuffleupagus | 0.376 | 0.387 | 0.256 | 0.485 |
-| 5. su******4@gmail.com | 0.326 | 0.496 | 0.0 | 0.481 |
+| 5. ishumei-Chinchunmei | 0.326 | 0.496 | 0.0 | 0.481 |
 | 6. hk**@georgetown.edu | 0.3082 | 0.433 | 0.0 | 0.492 |
 | 7. GIL-IIMAS UNAM  | 0.3080 | 0.478 | 0.0 | 0.446 |
 | 8. Atyaephyra | 0.273 | 0.348 | 0.014 | 0.456 |
@@ -131,7 +132,34 @@ Honarary mention for submissions not included in awards consideration list above
 | ay***********0@gmail.com | 0.356 | 0.0 | 0.84 | 0.229 |
 
 #### 1 Billion parameter model leaderboard:
-Upcoming.
+Final leaderboard for the 1B model is shown below. We do not filter submissions based on MMLU since the initial performance for this model was quite low to begin with. We include MMLU scores below for completeness. 
+
+| Team | Final Score | Task Aggregate | MIA Score | MMLU Avg. |
+| :------------------------------ | :---------- | :------------- | :-------- | :--------- |
+| 1. AILS-NTUA                       |    0.688    |      0.964     |   0.857   |   0.242   |
+| 2. SHA256                          |    0.652    |      0.973     |   0.741   |   0.243   |
+| 3. Atyaephyra                      |    0.586    |      0.887     |   0.622   |   0.248   |
+| 4. Mr. Snuffleupagus               |    0.485    |      0.412     |   0.793   |    0.25   |
+| 5. ZJUKLAB                         |    0.483    |      0.915     |   0.292   |   0.243   |
+| 6. GIL-IIMAS UNAM                  |    0.416    |        0       |    0.98   |   0.269   |
+| 7. ch**3@stu.ynu.edu.cn            |    0.412    |      0.955     |   0.039   |   0.244   |
+| 8. MALTO                           |    0.409    |        0       |   0.959   |   0.269   |
+| 9. JU-CSE-NLP'25                   |    0.397    |        0       |   0.929   |   0.261   |
+| 10. Cyber for AI                    |    0.389    |        0       |   0.914   |   0.251   |
+| 11. ay*******0@gmail.com            |    0.384    |        0       |   0.923   |   0.229   |
+| 12. Innovative_Team                 |    0.375    |        0       |   0.869   |   0.255   |
+| 13. NeuroReset                      |     0.36    |        0       |   0.841   |   0.238   |
+| 14. APT                             |    0.357    |      0.837     |     0     |   0.236   |
+| 15. chi**i@student.uni-tuebingen.de |    0.351    |        0       |   0.824   |   0.229   |
+| 16. hk**@georgetown.edu             |    0.205    |      0.378     |     0     |   0.236   |
+| 17. Lacuna Inc.                     |    0.177    |      0.289     |     0     |   0.243   |
+| 18. DUTir                           |    0.172    |      0.26      |   0.026   |   0.229   |
+| 19. ishumei-Chinchunmei             |    0.096    |      0.047     |     0     |   0.241   |
+| 20. Tsotsa                          |     0.08    |        0       |     0     |   0.241   |
+| 20. ma****8@gmail.com               |     0.08    |        0       |     0     |   0.239   |
+| 20. ne**r@sabanciuniv.edu           |     0.08    |        0       |     0     |    0.24   |
+| 20. NLPART                          |     0.08    |        0       |     0     |   0.241   |
+| 24. ai**c@protonmail.com            |    0.079    |        0       |     0     |   0.236   |
 
 ### Benchmark of unlearning algorithms on dataset
 
@@ -153,10 +181,10 @@ Gradient Ascent and KL Minimization were discarded since they severely degrade m
 - Rahul Gupta, Amazon AGI
 - Volkan Cevher, EPFL/Amazon AGI
 - Bhanu Vinzamuri, Amazon AGI
-- He Xie, Amazon AGI
-- Venkatesh Elango, Amazon AGI
 - Zhiqi (Woody) Bu, Amazon AGI
 - Mingyi Hong, Univ. of Minnesota/Amazon AGI
+- He Xie, Amazon AGI
+- Venkatesh Elango, Amazon AGI
 
 ### Important Dates
 
